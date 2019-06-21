@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> 
+        hello
+        </title>
+    </head>
+    <script></script>
+
+    <body>
+        <h1>submit page redirected successfully </h1>
+       <div>
+           <h1 id="emal"> dfsd = <%= eml %></h1>
+           <!-- <h1>Password = <%= passw %></h1> -->
+           <h1 id="pss"> <%= passw %></h1>
+           <input type="text" class="form-control" id="qwe" name="date2" placeholder="qwe" value =<%= dat %> >
+           <h1> email</h1>
+           <form method="post" action="/login/page">
+                <input type="email" class="form-control" id="email" name="email" placeholder="email" >
+           <h1 >password</h1>
+
+
+            <div >
+                <input type="text" class="form-control" id="pass" name="pass" placeholder=""value = changeValue(id) >
+           </div>
+           <h1> current date</h1>
+           <div >
+                <input type="text" class="form-control" id="date" name="date" placeholder="date" >
+          </div>
+          <h1> difference in dates</h1>
+          <div >
+               <input type="text" class="form-control" id="date2" name="date2" placeholder="date" >
+         </div>
+            <button type="tdn" onclick="changeValue()"  class="btn btn-primary" >Sign in</button>
+            <button type="tdn" onclick="dateDifference()"  class="btn btn-primary" >current Date</button>
+           </form>
+           <script>
+           function changeValue(){
+            
+            var f1=document.getElementById('emal').innerText;
+            var f2=document.getElementById('pss').innerText;
+            
+
+            document.getElementById('email').value=f1;
+            document.getElementById('pass').value=f2;
+            
+            }
+            function dateDifference(){
+                 var day = 1000 *60 * 60 *24;
+                 var date1_ms = document.getElementById('qwe').value;
+                 var curr = new Date();
+                 var date2_ms =curr.getDate();
+
+                 var difference_ms = Math.abs(date1_ms - date2_ms);
+                 document.getElementById('date2').value =difference_ms;
+                 document.getElementById('date').value = date2_ms;
+
+                 Math.round(difference_ms)
+      }
+
+           </script>
+           
+       </div>
+    </body>
+</html>
