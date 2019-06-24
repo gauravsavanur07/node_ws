@@ -20,8 +20,9 @@
     <script>
 
             function rowDelete(){
-                var myBooks =document.getElementById('pass').value;
-                 var myBooks1 = JSON.parse(myBooks);
+                
+                
+                
                 /*
                 var index = null;
     for (var i =0; i < myArr.length; i++) {
@@ -36,14 +37,52 @@
                 
                 */
 
-                 var key=document.getElementById('key').value;
+                 
+                var key=document.getElementById("[i]").value;
                  console.log(key);
                  for (var i = 0; i < myBooks1.length; i++) {
-                        console.log(myBooks1[0].name);
-                       if(myBooks1[i].name===key){
-                        myBooks1.splice(i,1);
-                        console.log(myBooks1);
+                       
+                       if(key==myBooks1[i].name){
+                           console.log(key);
+                           console.log(myBooks1[i].name);
 
+                        myBooks1.splice(key,1);
+                        console.log(myBooks1);
+                
+                    
+                        var table = document.createElement("table");
+                        var col = [];
+                        if (col.indexOf(key) === -1) {
+                            col.pop(key);
+                        }
+                        var tr = table.deleteRow(-1);  
+                        tr = table.deleteRow(-1);
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+                        // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+            for (var j = 0; j < col.length; j++) {
+                        var tabCell = tr.deleteCell(-1);
+                        tabCell.innerHTML = myBooks1[i][col[j]];
+                    }
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+     
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("showData");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+                        
+
+
+                    //     for (var j = 0; j < col.length; j++) {
+                    //     var tabCell = tr.deleteCell(-1);
+                    //     tabCell.innerHTML = myBooks1[i][col[j]];
+                    // }
                     }
                     else{
                         console.log("Not Working ");
@@ -72,6 +111,47 @@
        
     // }); 
     //         }
+
+    function deleteRow(rowid)  
+{   
+    alert(rowid);
+    var i = rowid.parentNode.parentNode.rowIndex;
+    
+    document.getElementById("table1").deleteRow(i);
+    var  filtered_res = []
+    var myBooks =document.getElementById('pass').value;
+    var myBooks1 = JSON.parse(myBooks);
+    
+    
+   z =    myBooks1.splice(i,1)
+   
+   console.log(z);
+   for (var i = 0; i < myBooks1.length; i++) {
+ filtered_res = myBooks1.filter( i => i != z)
+ console.log((filtered_res));
+
+   }
+
+    
+ 
+    // console.log((myBooks1[i]));
+
+//   var table = document.getElementById("table1").tableToJSON(); // Convert the table into a javascript object
+  console.log();
+  alert(JSON.stringify(table1));
+  
+
+//   console.log(myBooks1);
+    //document.getElementById('ew').remove(document.getElementById(rowid));
+    
+    // var row = document.getElementById(rowid);
+    // var table = row.parentNode;
+    // while ( table && table.tagName != 'TABLE' )
+    //     table = table.parentNode;
+    // if ( !table )
+    //     return;
+    // table.deleteRow(row.rowIndex);
+}
             function CreateTableFromJSON() {
                 alert("sdfg")
                 
@@ -124,21 +204,23 @@
         
 </head>
 <body>
-    <button type="deleteBtn" onclick="rowDelete()"  class="btn btn-primary" >current Date</button>
+    <button type="deleteBtn"  onclick="deleteRow()"  class="btn btn-primary" >current Date</button>
     <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
     <p id="showData"></p>
     <input type="hidden" class="form-control" id="pass" name="pass" placeholder="" value="<%=jsp%>">
     <input type="text" class="form-control" id="key" name="pass" placeholder="key" value="">
-
+    
     <!-- <p><%=jsp%></p> -->
-    <table>
-        <tbody>
+    <table id="table1">
+        <tbody id ="ew">
             <%for(var i=0;i<jsondet.length;i++){%>
-                <tr>
+                    <input type="hidden" class="form-control" name="pass" placeholder="key" value="<%= jsondet[i].name%>">
+                var j=<%=i%>;
+                    <tr id ="<%=i%>">
                     <td><%=jsondet[i].id%></td>
                     <td><%=jsondet[i].name%></td>
                     <td> latititude <%= jsondet[i].latitude%></td>
-
+                    <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key" value="<%= jsondet[i].name%>"><button type="deleteBtn" onclick="deleteRow(this)" value =<%= jsondet[i].name%>class="btn btn-primary" >delete </button></td>
 
                 </tr>
                 <%}%>
