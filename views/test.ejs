@@ -1,229 +1,238 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Convert JSON Data to HTML Table</title>
     <style>
-        th, td, p, input {
-            font:14px Verdana;
+        th,
+        td,
+        p,
+        input {
+            font: 14px Verdana;
         }
-        table, th, td 
-        {
+
+        table,
+        th,
+        td {
             border: solid 1px #DDD;
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
         }
+
         th {
-            font-weight:bold;
+            font-weight: bold;
         }
     </style>
     <script>
 
-            function rowDelete(){
-                
-                
-                
-                /*
-                var index = null;
-    for (var i =0; i < myArr.length; i++) {
-        if (myArr[i].filename === fileName) {
-            index = i;
-            break;
-        }
+        function rowDelete() {
+
+
+
+            /*
+            var index = null;
+for (var i =0; i < myArr.length; i++) {
+    if (myArr[i].filename === fileName) {
+        index = i;
+        break;
     }
-    if (index !== null) {
-        myArr.splice(index, 1);
-    }
-                
-                */
+}
+if (index !== null) {
+    myArr.splice(index, 1);
+}
+            
+            */
 
-                 
-                var key=document.getElementById("[i]").value;
-                 console.log(key);
-                 for (var i = 0; i < myBooks1.length; i++) {
-                       
-                       if(key==myBooks1[i].name){
-                           console.log(key);
-                           console.log(myBooks1[i].name);
 
-                        myBooks1.splice(key,1);
-                        console.log(myBooks1);
-                
-                    
-                        var table = document.createElement("table");
-                        var col = [];
-                        if (col.indexOf(key) === -1) {
-                            col.pop(key);
-                        }
-                        var tr = table.deleteRow(-1);  
-                        tr = table.deleteRow(-1);
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+            var key = document.getElementById("[i]").value;
+            console.log(key);
+            for (var i = 0; i < myBooks1.length; i++) {
 
-                        // TABLE ROW.
+                if (key == myBooks1[i].name) {
+                    console.log(key);
+                    console.log(myBooks1[i].name);
 
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
-        }
-            for (var j = 0; j < col.length; j++) {
+                    myBooks1.splice(key, 1);
+                    console.log(myBooks1);
+
+
+                    var table = document.createElement("table");
+                    var col = [];
+                    if (col.indexOf(key) === -1) {
+                        col.pop(key);
+                    }
+                    var tr = table.deleteRow(-1);
+                    tr = table.deleteRow(-1);
+                    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+                    // TABLE ROW.
+
+                    for (var i = 0; i < col.length; i++) {
+                        var th = document.createElement("th");      // TABLE HEADER.
+                        th.innerHTML = col[i];
+                        tr.appendChild(th);
+                    }
+                    for (var j = 0; j < col.length; j++) {
                         var tabCell = tr.deleteCell(-1);
                         tabCell.innerHTML = myBooks1[i][col[j]];
                     }
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-     
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
-                        
+                    // ADD JSON DATA TO THE TABLE AS ROWS.
+
+                    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+                    var divContainer = document.getElementById("showData");
+                    divContainer.innerHTML = "";
+                    divContainer.appendChild(table);
+
 
 
                     //     for (var j = 0; j < col.length; j++) {
                     //     var tabCell = tr.deleteCell(-1);
                     //     tabCell.innerHTML = myBooks1[i][col[j]];
                     // }
-                    }
-                    else{
-                        console.log("Not Working ");
-                    }
-                    }
-                 }
-                
-    //             const id = req.params.restaurantId;
-    // Restaurant.remove({_id:id  }).exec()
-    // .then(result => {
-    //     res.status(200).json({
-    //         message: 'Product deleted ',
-    //         request: {
-    //             type : 'POST',
-    //             url: 'http://localhost3000/restaurant',
-    //             data :{
-    //                 name: 'String',
-    //                 cuisine: 'String'
-    //             }
-    //         }
-    //     });
-    // }).catch(err => {
-    //     res.status(200).json({
-    //         error:err
-    //     });
-       
-    // }); 
-    //         }
-
-    function deleteRow(rowid)  
-{   
-    alert(rowid);
-    var i = rowid.parentNode.parentNode.rowIndex;
-    
-    document.getElementById("table1").deleteRow(i);
-    var  filtered_res = []
-    var myBooks =document.getElementById('pass').value;
-    var myBooks1 = JSON.parse(myBooks);
-    
-    
-   z =    myBooks1.splice(i,1)
-   
-   console.log(z);
-   for (var i = 0; i < myBooks1.length; i++) {
- filtered_res = myBooks1.filter( i => i != z)
- console.log((filtered_res));
-
-   }
-
-    
- 
-    // console.log((myBooks1[i]));
-
-//   var table = document.getElementById("table1").tableToJSON(); // Convert the table into a javascript object
-  console.log();
-  alert(JSON.stringify(table1));
-  
-
-//   console.log(myBooks1);
-    //document.getElementById('ew').remove(document.getElementById(rowid));
-    
-    // var row = document.getElementById(rowid);
-    // var table = row.parentNode;
-    // while ( table && table.tagName != 'TABLE' )
-    //     table = table.parentNode;
-    // if ( !table )
-    //     return;
-    // table.deleteRow(row.rowIndex);
-}
-            function CreateTableFromJSON() {
-                alert("sdfg")
-                
-                 var myBooks =document.getElementById('pass').value;
-                 var myBooks1 = JSON.parse(myBooks);
-                 console.log("json data fetched",myBooks[0])
-        
-                 console.log("json data fetched",myBooks1[0])
-                // EXTRACT VALUE FOR HTML HEADER. 
-                // dynamic deleting of nutrition values 
-                var col = [];
-                for (var i = 0; i < myBooks1.length; i++) {
-                    for (var key in myBooks1[i]) {
-                        if (col.indexOf(key) === -1) {
-                            col.push(key);
-                        }
-                    }
                 }
-        
-                // CREATE DYNAMIC TABLE.
-                var table = document.createElement("table");
-        
-                // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-        
-                var tr = table.insertRow(-1);                   // TABLE ROW.
-        
-                for (var i = 0; i < col.length; i++) {
-                    var th = document.createElement("th");      // TABLE HEADER.
-                    th.innerHTML = col[i];
-                    tr.appendChild(th);
+                else {
+                    console.log("Not Working ");
                 }
-        
-                // ADD JSON DATA TO THE TABLE AS ROWS.
-                for (var i = 0; i < myBooks1.length; i++) {
-        
-                    tr = table.insertRow(-1);
-        
-                    for (var j = 0; j < col.length; j++) {
-                        var tabCell = tr.insertCell(-1);
-                        tabCell.innerHTML = myBooks1[i][col[j]];
-                    }
-                }
-        
-                // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-                var divContainer = document.getElementById("showData");
-                divContainer.innerHTML = "";
-                divContainer.appendChild(table);
             }
-        </script>
-        
+        }
+
+        //             const id = req.params.restaurantId;
+        // Restaurant.remove({_id:id  }).exec()
+        // .then(result => {
+        //     res.status(200).json({
+        //         message: 'Product deleted ',
+        //         request: {
+        //             type : 'POST',
+        //             url: 'http://localhost3000/restaurant',
+        //             data :{
+        //                 name: 'String',
+        //                 cuisine: 'String'
+        //             }
+        //         }
+        //     });
+        // }).catch(err => {
+        //     res.status(200).json({
+        //         error:err
+        //     });
+
+        // }); 
+        //         }
+
+        function deleteRow(rowid) {
+            alert(rowid);
+            var i = rowid.parentNode.parentNode.rowIndex;
+
+            document.getElementById("table1").deleteRow(i);
+            var filtered_res = []
+            var myBooks = document.getElementById('pass').value;
+            var myBooks1 = JSON.parse(myBooks);
+
+
+            z = myBooks1.splice(i, 1)
+
+            console.log(z);
+            for (var i = 0; i < myBooks1.length; i++) {
+                filtered_res = myBooks1.filter(i => i != z)
+                console.log((filtered_res));
+
+            }
+
+
+
+            // console.log((myBooks1[i]));
+
+            //   var table = document.getElementById("table1").tableToJSON(); // Convert the table into a javascript object
+            console.log();
+            alert(JSON.stringify(table1));
+
+
+            //   console.log(myBooks1);
+            //document.getElementById('ew').remove(document.getElementById(rowid));
+
+            // var row = document.getElementById(rowid);
+            // var table = row.parentNode;
+            // while ( table && table.tagName != 'TABLE' )
+            //     table = table.parentNode;
+            // if ( !table )
+            //     return;
+            // table.deleteRow(row.rowIndex);
+        }
+        function CreateTableFromJSON() {
+            alert("sdfg")
+
+            var myBooks = document.getElementById('pass').value;
+            var myBooks1 = JSON.parse(myBooks);
+            console.log("json data fetched", myBooks[0])
+
+            console.log("json data fetched", myBooks1[0])
+            // EXTRACT VALUE FOR HTML HEADER. 
+            // dynamic deleting of nutrition values 
+            var col = [];
+            for (var i = 0; i < myBooks1.length; i++) {
+                for (var key in myBooks1[i]) {
+                    if (col.indexOf(key) === -1) {
+                        col.push(key);
+                    }
+                }
+            }
+
+            // CREATE DYNAMIC TABLE.
+            var table = document.createElement("table");
+
+            // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+            var tr = table.insertRow(-1);                   // TABLE ROW.
+
+            for (var i = 0; i < col.length; i++) {
+                var th = document.createElement("th");      // TABLE HEADER.
+                th.innerHTML = col[i];
+                tr.appendChild(th);
+            }
+
+            // ADD JSON DATA TO THE TABLE AS ROWS.
+            for (var i = 0; i < myBooks1.length; i++) {
+
+                tr = table.insertRow(-1);
+
+                for (var j = 0; j < col.length; j++) {
+                    var tabCell = tr.insertCell(-1);
+                    tabCell.innerHTML = myBooks1[i][col[j]];
+                }
+            }
+
+            // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+            var divContainer = document.getElementById("showData");
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table);
+        }
+    </script>
+
 </head>
+
 <body>
-    <button type="deleteBtn"  onclick="deleteRow()"  class="btn btn-primary" >current Date</button>
+    <button type="deleteBtn" onclick="deleteRow()" class="btn btn-primary">current Date</button>
     <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
     <p id="showData"></p>
     <input type="hidden" class="form-control" id="pass" name="pass" placeholder="" value="<%=jsp%>">
     <input type="text" class="form-control" id="key" name="pass" placeholder="key" value="">
-    
+
     <!-- <p><%=jsp%></p> -->
     <table id="table1">
-        <tbody id ="ew">
+        <tbody id="ew">
             <%for(var i=0;i<jsondet.length;i++){%>
-                    <input type="hidden" class="form-control" name="pass" placeholder="key" value="<%= jsondet[i].name%>">
-                var j=<%=i%>;
-                    <tr id ="<%=i%>">
-                    <td><%=jsondet[i].id%></td>
-                    <td><%=jsondet[i].name%></td>
-                    <td> latititude <%= jsondet[i].latitude%></td>
-                    <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key" value="<%= jsondet[i].name%>"><button type="deleteBtn" onclick="deleteRow(this)" value =<%= jsondet[i].name%>class="btn btn-primary" >delete </button></td>
+            <input type="hidden" class="form-control" name="pass" placeholder="key" value="<%= jsondet[i].name%>">
+            var j=<%=i%>;
+            <tr id="<%=i%>">
+                <td><%=jsondet[i].id%></td>
+                <td><%=jsondet[i].name%></td>
+                <td> latititude <%= jsondet[i].latitude%></td>
+                <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                        value="<%= jsondet[i].name%>"><button type="deleteBtn" onclick="deleteRow(this)"
+                        value=<%= jsondet[i].name%>class="btn btn-primary">delete </button></td>
 
-                </tr>
-                <%}%>
+            </tr>
+            <%}%>
             </tbody>
         </table>
 </body>
