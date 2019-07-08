@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+        <html>
+
+        <head>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"></link>
+                <title> </title>  
+       </head>
+        
+            <style>
+                .sm{
+                    width:50%;
+                    height:100%;
+                }
+                .sm-2{
+                    width:50%;
+                    height:100%;
+                    float:right;
+                    padding-left:15px;
+                }
+                    th,
+                    td,
+                    p,
+                    input {
+                        font: 14px Verdana;
+                    }
+            
+                    table,
+                    th,
+                    td {
+                        border: solid 1px #DDD;
+                        border-collapse: collapse;
+                        padding: 2px 3px;
+                        text-align: center;
+                    }
+            
+                    th {
+                        font-weight: bold;
+                    }
+                </style>
+        <script>
+            function editRow(rowid){
+                  var rowid =oObject.id;
+                  var rb1= document.getElementById("ew"+id).value;
+
+                  var renid = document.getElementById("ew"+id).value;
+
+                  document.getElementById("temprenid").value=id;
+                  document.getElementById("edit_ren_load_data").submit();
+
+            }
+            function deleteRow(rowid) {
+            alert(rowid);
+            var i = rowid.parentNode.parentNode.rowIndex;
+
+            document.getElementById("table1").deleteRow(i);
+            }
+        </script>
+            <body>
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+                            <div class="container">
+                              <a class="navbar-brand" href="#">
+                                    <img src="../images/logo.jpg" alt="1">
+                                  </a>
+                              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                  </button>
+                              <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav ml-auto">
+                                  <li class="nav-item active">
+                                    <a class="nav-link" href="#">Home
+                                          <span class="sr-only">(current)</span>
+                                        </a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="#">About</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="#">Services</a>
+                                  </li>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="#">Contact</a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </nav>
+                    <form method="post" action="../views/table_search.ejs">
+                    <div class="form-row">
+                            <div class="sm">
+                              <label for="inputName4">Account Name</label>
+                              <input type="email" class="form-control" id="email" name="email" placeholder="Account Name">
+                            </div>
+                        </br>
+                            <div class="sm-2">
+                              <label for="inputNumber4">Account Number</label>
+                              <input type="text" class="form-control" id="pass" name="pass" placeholder="Account Number">
+                            </div>
+                        </br>
+                        <div class = "form-row-6">
+                                <div class ="form-group col-md-6">
+                                <label for="inputOption4">Account Status</label>
+                                    <select>
+                                            <option value="active ">Active</option>
+                                            <option value="Not Active">Not Active</option>
+                                            <option value="Passive">Passive</option>
+                                            
+                                          </select>
+                               </div>
+                            </br>
+
+                            
+                            </div>
+                           
+                               <div class = "form -group col-md-6">
+                                    <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                                    value="<%=name%>"><button type="deleteBtn" onclick="searchRow(this)"
+                                    value=<%=name%>class="btn btn-primary">Search </button>
+                               </div>
+                            </br>
+                               <div class = "form-group  col-md-6">
+                                    <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                                    value="<%=name%>"><button type="EditBtn" onclick=""
+                                    value=<%=name%>class="btn btn-primary">Add </button>
+                               </div>
+                               </div>
+                            </br>
+                            </div>
+                            </form>
+       
+        <table id="table1">
+                <tbody id="ew">
+                <tr>
+                        <a key="text" name="btnUpEmp" href="../views/account_renewal?key=ADD">
+                    <td>Account Name</td> 
+                    <td>Account Type</td>
+                    <td>Account Number</td>
+                    <td>Account Status</td>
+                    <td>Account Balance</td> 
+                    <td>Opening Balance</td>
+                    <td>Closing Balance</td> 
+                    <td>Delete Button</td>
+                    <td>Edit Button</td>
+                </tr>
+
+                  
+                    
+                <tr>
+                <td><%=name%></td>
+                <td><%=type%></td>
+                <td><%=number%></td>
+                <td><%=status%></td>
+                <td><%=balance%></td>
+                <td><%=open%></td>
+                <td><%=close%></td>
+                
+                <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                        value="<%=name%>"><button type="deleteBtn" onclick="deleteRow(this)"
+                        value=<%=name%>class="btn btn-primary">delete </button></td>
+                <td> <button type="EditBtn" onclick="editRow(this)" class="btn btn-primary">Edit </button></td>
+                
+        
+                    </tr>
+                
+                    </tbody>
+                </table>
+    </body>
+</html>

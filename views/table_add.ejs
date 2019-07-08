@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="../views/table.ejs"></script>
+    </head>
+
+    <title>  </title>
+
+    <body>
+        <!-- Add Record Button  -->
+        <%if(pagetype=='ADD'){%>
+        <div class = "content">
+            <div class="row-sm">
+                <div class="col-sm-12">
+                    <div class="card-tp">
+                        <div class="card-header">
+                            <h5>
+                                Add Record
+                            </h5>
+                        </div>
+                        <div class="content">
+                            <div id="account_details" class= >
+                                <h5>Accounts</h5>
+                                <hr>
+                                <div class="container row mb-4">
+                                    <div class = "col-sm-12 col-md-6"
+                                    <label for="acc_shrt_nme" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Short Name<span></span>
+                                        class="astrix">*</span></label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_shrt_nme" id="acc_shrt_nme" placeholder="" maxlength="10"
+                                    style="text-transform: capitalize" onkeypress="return alpha(event)">
+                                </div>
+                                <div class ="col-sm-6 col-md-6">
+                                    <label for="acc_name" class="mr-sm-4 col-sm-12 col-md-5"> short Name</label>
+                                    <input type = "text" class="astrix"      >                          
+
+                        </div>
+                        <div class="container row mt-2">
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="acc_mem" class="mr-sm-4 col-sm-12 col-md-5"
+                                        style="padding-left:0% !important;">Member Id<span
+                                            class="astrix">*</span></label>
+                                            <select name="acc_mem" class="col-sm-12 col-md-6" id="acc_mem">
+
+                                                <option selected="" disabled="" value="">Select
+                                                        <option value="001">001</option>
+                                                        <option value="002">002</option>
+                                                        <option value="003">003</option>
+                                                </option>
+
+                                            </select>
+                                </div>
+
+                               
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="mem_typ" class="mr-sm-4 col-sm-12 col-md-5"
+                                        style="padding-left:0% !important;">Member Type<span
+                                            class="astrix">*</span></label>
+                                            <select name="mem_typ" class="col-sm-12 col-md-6" id="mem_typ">
+
+                                                <option selected="" disabled="" value="">Select
+                                                        <option value="Savings">Savings</option>
+                                                        <option value="Current">Current</option>
+                                                </option>
+
+                                            </select>
+
+
+                                </div>
+                                
+                            </div>
+
+                                                       
+                        </div>
+                        <div class="container row mt-4">
+
+                                 <div class="col-sm-12 col-md-6 ">
+                                <label for="acc_num" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Account
+                                    Number</label>
+                                <input type="text" class="col-sm-12 col-md-6" name="acc_num"
+                                    id="acc_num" placeholder="" maxlength="16"
+                                    style="text-transform: capitalize" onkeypress="return numeric(event)">
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_typ" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Account Type<span
+                                        class="astrix">*</span></label>
+                                        <select name="acc_typ" class="col-sm-12 col-md-6" id="acc_typ">
+
+                                            <option selected="" disabled="" value="">Select
+                                                    <option value="Savings">Savings</option>
+                                                    <option value="Current">Current</option>
+                                                    <option value="Term">Term</option>
+                                            </option>
+
+                                        </select>
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="container row mt-4">
+
+                            <div  class="col-sm-12 col-md-6">
+                                <label for="acc_stat" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Account
+                                    Status</label>
+                                <!-- <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_stat" id="acc_stat" placeholder=""
+                                    style="text-transform: capitalize" onkeypress="return alpha(event)"> -->
+
+                                    <select class="col-sm-12 col-md-6" name="acc_stat" id="acc_stat">
+                                        <option disabled="" selected="" value="">Select</option>
+                                        <option value="Active">Active</option>
+                                      <option value="Inactive">Inactive</option>
+                                      <option value="Dormant">Dormant</option>
+                                    </select>
+
+                            </div>
+
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_schm" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Account Scheme<span
+                                        class="astrix">*</span></label>
+                                <!-- <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_schm" id="acc_schm" placeholder=""
+                                    style="text-transform: capitalize" onkeypress="return alpha(event)"> -->
+                                    <input type="text" class="typeahead2 tt-query" name="acc_schm" id="acc_schm" autocomplete="off" spellcheck="false" >
+                            </div>
+                           
+                        </div>
+                        <div class="container row mt-2">
+
+                             <div class="col-sm-12 col-md-6">
+                                <label for="acc_cat_typ" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Category Type<span
+                                        class="astrix">*</span></label>
+                                        <select name="acc_ch_catagory_type" class="col-sm-12 col-md-6" id="acc_cat_typ">
+
+                                            <option selected="" disabled="" value="">Select
+                                                    <option value="Individual">Individual</option>
+                                                    <option value="Joint">Joint</option>
+                                                    <option value="Proprietor">Proprietor</option>
+                                                    <option value="Partnership">Partnership</option>
+                                                    <option value="Pvt ltd co">Pvt ltd co</option>
+                                                    <option value="Pub ltd co">Pub ltd co</option>
+                                            </option>
+
+                                        </select>
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_curr_typ" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Currency
+                                    Type</label>
+                                    <select name="acc_curr_typ" class="col-sm-12 col-md-6" id="acc_curr_typ" onchange="currency()">
+
+                                        <option selected="" disabled="" value="">Select
+                                                <option value="Local">Local</option>
+                                                <option value="Foreign">Foreign</option>
+                                        </option>
+
+                                    </select>
+
+                            </div>
+                         
+                        </div>
+                        <div class="container row mt-4">
+
+                               <!-- <div class="col-sm-12 col-md-6">
+                                <label for="acc_code" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Code</label>
+                                    <select name="acc_code" class="col-sm-12 col-md-6" id="acc_code">
+
+                                        <option selected="" disabled="" value="">Select
+                                                <option value="Rupees">Rupees</option>
+                                                <option value="Dollars">Dollars</option>
+                                                <option value="Pounds">Pounds</option>
+                                                <option value="Euros">Euros</option>
+                                                <option value="Yen">Yen</option>
+                                        </option>
+
+                                    </select> -->
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+
+                                <label for="acc_openg_date"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Opening Date</label>
+
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_openg_date" id="acc_openg_date" placeholder=""
+                                    required>
+                                <span><i class="material-icons iicon1 iicon11"
+                                        name="ic_acc_openg_date" id="ic_acc_openg_date"
+                                        data-toggle="acc_openg_date"
+                                        data-target-name="acc_openg_date">
+                                        event_note
+                                    </i></span>
+
+                            </div>
+
+                           
+                        </div>
+                        <div class="container row mt-4">
+
+                             <div class="col-sm-12 col-md-6">
+                                <label for="acc_opng_amt" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Opening
+                                    Amount</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_opng_amt" id="acc_opng_amt" placeholder="" onkeypress="return amount(event)" maxlength="6">
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_curr_bal" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Current
+                                    Balance</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_curr_bal" id="acc_curr_bal" placeholder="" onkeypress="return amount(event)" maxlength="6">
+
+                            </div>
+                           
+                        </div>
+                        <div class="container row mt-4">
+
+                             <div class="col-sm-12 col-md-6">
+                                <label for="acc_intrst_on_acct"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Interest On
+                                    Account</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_intrst_on_acct" id="acc_intrst_on_acct"
+                                    placeholder="" maxlength="2" onkeypress="return numeric(event)">
+
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_has_chqbok"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Has
+                                    Chequebook</label>
+                                    <select name="acc_has_chqbok" class="col-sm-12 col-md-6" id="acc_has_chqbok">
+
+                                        <option selected="" disabled="" value="">Select
+                                                <option value="Yes">Yes</option>
+                                                <option value="NO">No</option>
+
+                                        </option>
+
+                                    </select>
+
+                            </div>
+                            </div>
+
+                               <div class="container row mt-4">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_is_sal_acct"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Is Salary
+                                    Aaccount</label>
+                               <select name="acc_is_sal_acct" class="col-sm-12 col-md-6" id="acc_is_sal_acct">
+
+                                        <option selected="" disabled="" value="">Select
+                                                <option value="Yes">Yes</option>
+                                                <option value="NO">No</option>
+
+                                        </option>
+
+                                    </select>
+
+                            </div>
+                      
+                     
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_count_pay"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Counter Pay</label>
+                                    <select name="acc_count_pay" class="col-sm-12 col-md-6" id="acc_count_pay">
+
+                                        <option selected="" disabled="" value="">Select
+                                                <option value="Yes">Yes</option>
+                                                <option value="NO">No</option>
+
+                                        </option>
+
+                                    </select>
+                                      </div>
+
+                            </div>
+                            <div class="container row mt-4">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_oprn_instrn"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Operation
+                                    Instructions</label>
+                                    <select class="col-sm-12 col-md-6" name="acc_oprn_instrn"
+                                    id="acc_oprn_instrn">
+                                    <option disabled="" selected="" value="">Select
+                                            <option value="Self">Self</option>
+                                            <option value="Joint">Joint</option>
+                                            <option value="E or S">E or S</option>
+                                            <option value="Any One">Any One</option>
+                                    </option>
+                                </select>
+                            </div>
+                             <div class="col-sm-12 col-md-6">
+                                <label for="acc_lst_trnscn_date"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Last Transaction
+                                    Date</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_lst_trnscn_date" id="acc_lst_trnscn_date"
+                                    placeholder="" required>
+                                <span><i class="material-icons iicon1 iicon11"
+                                        name="ic_acc_lst_trnscn_date"
+                                        id="ic_acc_lst_trnscn_date"
+                                        data-toggle="acc_lst_trnscn_date"
+                                        data-target-name="acc_lst_trnscn_date">
+                                        event_note
+                                    </i></span>
+
+                            </div>
+                        </div>
+                        <div class="container row mt-4">
+                           
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_intdc_det"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Introducer
+                                    Details</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_intdc_det" id="acc_intdc_det" maxlength="20" placeholder="">
+
+                            </div>
+                       
+                       
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_intdc_kwn_perd"
+                                    class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Introduce Known
+                                    Period</label>
+                                <input type="text" class="col-sm-12 col-md-6"
+                                    name="acc_intdc_kwn_perd" id="acc_intdc_kwn_perd"
+                                    placeholder="" maxlength="10" onkeypress="return alphanumeric(event)">
+
+                            </div>
+                             </div>
+                               <div class="container row mt-4">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_is_main" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Is Main</label>
+                                <select class="col-sm-12 col-md-6" name="acc_is_main"
+                                    id="acc_is_main">
+                                    <option disabled="" selected="" value="">Select
+                                            <option value="Yes">Yes</option>
+                                            <option value="NO">No</option>
+                                    </option>
+                                </select>
+
+                            </div>
+                        
+                     
+                            <div class="col-sm-12 col-md-6">
+                                <label for="acc_desc" class="mr-sm-4 col-sm-12 col-md-5"
+                                    style="padding-left:0% !important;">Description</label>
+                                <textarea rows="3" class="col-sm-12 col-md-6"
+                                    name="acc_desc" id="acc_desc" maxlength="30" placeholder=""> </textarea>
+
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        }
+
+        <!-- Add Button Delete -->
+        <!-- Edit Button Start  -->
+        <%if(pagetype =='EDIT'){%>
+        <div class ="content">
+            <div class = "row-sm">
+                <div class="col-sm-12">
+                    <div class="card-header">
+                        <div class="card-body">
+                            <div class ="content">
+                                <h6> Edit Record</h6>
+                                <form action="../views/table_search.ejs" method="post" id= "accounts_form_edit" autocomplete="="off>
+                                <div id="tabs">
+                                    <ul class="nav nav-pills ul_col" id="tabs">
+                                       <li class="nav-item">
+                                        <a class="nav-link txt_col " id="tabs" data-tabs="tabs" role="tablist" href="#accountdetails">Accounts
+
+                                        </a>       
+                                    </li> 
+                                    </ul>
+                                    <div class ="tab content">
+                                        <div id="account_details" class="container tab-pane show active">
+                                            <h5> Accounts</h5>
+                                            <hr>
+                                            <div class="container row mb-4">
+                                                <div class="col-sm-12 col-md6">
+                                                    <label for="aco_shrt_name" class="mr-sm-4 col-sm-12 col-md-6" style="padding-left:0% !important">Short Name<span class="astrix"></span>span></label>
+                                                    <input type="text" class="col-sm-12 col-md-6" name="acc_shrt_nme_ed" id="acc_shrt_nme_ed" placeholder="" maxlength="10" style="text-transform: capitalize" value="<%=ed_acc_shortname%>"onkeypress="return alpha(event)">
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <label for="acc_nme_ed" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important"<%=ed_acc_member%>
+                                                        
+                                                    <option value="001">Active</option>
+                                                    <option value="002">Not Active</option>
+                                                    <option value="003">Passive</option>
+
+                                                    </label>
+                                                </div>
+                                                <div class="container row mt-4">
+                                                    <div class="col-sm-12 col-md-6">
+                                                        <label for="acc_last_transaction_date" class="col-sm-12 col-md-6" name="acc_lst_trnsm_date_ed" id="acc_lst_trnsn_date_ed" placeholder=""value="<%=moment(ed_acc-lst_trnsn_date).format("DD-MM-YYYY")%>" required</label> 
+
+                                                        
+                                                </div>
+
+                                            </div>
+                                            
+
+                                            </div>
+                                            </form>
+                                                </span>
+                                                    
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+/*
+
+*/
+        <!-- Edit Button Stop -->
+    </body>
+</html>
