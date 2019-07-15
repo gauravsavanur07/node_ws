@@ -2,7 +2,6 @@ var express=require('express');
 
 var router = express.Router();
 
-
 router.post('/page',function(req,res){
 
 
@@ -12,9 +11,10 @@ router.post('/page',function(req,res){
     var age = req.body.age;
     
      console.log("sdfghj",passwd);
-    if(email=="gauravsavanur07@gmail.com"&&passwd=="123456" && age>18){
+    if(email=="gauravsavanur07@gmail.com"&&passwd=="123456"){
     res.render('page',{eml:email,passw:passwd, dat:date});
 }
+
 })
 
 module.exports=router;

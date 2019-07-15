@@ -39,7 +39,7 @@
     </div>
   </div>
   </div>
-  <button type="submit" onclick="validateForm()"  class="btn btn-primary" >Sign in</button>
+  <button type="submit"   class="btn btn-primary" >Sign in</button>
 </form>
     </body>
     <script>
@@ -81,30 +81,24 @@
     // }
     // return age;
     //}
-    function validateForm()
-{
-    // *snipped firstname, surname, email validation*
-    var dob = document.getElementById("date1").value;
-    // *snipped dob validation*
-    // var area = document.getElementById("areaofinterest").value;
-    // if (area == "")
-    // {
-    //     alert("Please select an Area of Interest!");
-    //     return false;
-    // }
-    var now = new Date();
-    var birthdate = dob.split(" ");
-    var born = new Date(dob[2], dob[0], dob[1] * 1 - 1);
-    var age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
-    if ( age<18)
-    {
-        console.log("You need to be 18 years of age and older for the Adults books!");
-        return false;
-    }
-    console.log("no")
-return true;
-}
- </script>
+//     function validateForm()
+// {
+//     // *snipped firstname, surname, email validation*
+//     var dob = document.getElementById("date1").value;
+    
+//     var now = new Date();
+//     var birthdate = dob.split(" ");
+//     var born = new Date(dob[2], dob[0], dob[1] * 1 - 1);
+//     var age = Math.floor((now.getTime() - born.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
+//     if ( age<18)
+//     {
+//         console.log("You need to be 18 years of age and older for the Adults books!");
+//         return false;
+//     }
+//     console.log("no")
+// return true;
+// }
+//  </script>
     
 
   <!-- <script>

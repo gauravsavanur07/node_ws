@@ -1,5 +1,6 @@
 var pg = require('pg');
 
+
 var config = {
     user: 'postgres',
     database: 'postgres',
@@ -8,13 +9,8 @@ var config = {
 
 
 }
+
 var pool = new pg.Pool(config);
 
-pool.connect(function(err, client,done){
-    if(err){
-        console.log("error in connecting", err)
-    }
-    done();
-});
 
 module.exports = pool;

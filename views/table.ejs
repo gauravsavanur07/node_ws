@@ -10,6 +10,14 @@
        </head>
         
             <style>
+                .navbar-default {
+                      background-color:	#32CD32;
+                       border-color:	#32CD32;
+                }
+/* Title */
+                .navbar-default .navbar-brand {
+                 color:	#32CD32;
+              }
                 .sm{
                     width:50%;
                     height:100%;
@@ -43,12 +51,12 @@
         <script>
             function editRow(rowid){
                   var rowid =oObject.id;
-                  var rb1= document.getElementById("ew"+id).value;
+                  var rb1= document.getElementById(""+id).value;
 
-                  var renid = document.getElementById("ew"+id).value;
+                  var renid = document.getElementById(""+id).value;
 
-                  document.getElementById("temprenid").value=id;
-                  document.getElementById("edit_ren_load_data").submit();
+                  document.getElementById("").value=id;
+                  document.getElementById("").submit();
 
             }
             function deleteRow(rowid) {
@@ -59,7 +67,7 @@
             }
         </script>
             <body>
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-black  static-top">
                             <div class="container">
                               <a class="navbar-brand" href="#">
                                     <img src="../images/logo.jpg" alt="1">
@@ -87,7 +95,7 @@
                               </div>
                             </div>
                           </nav>
-                    <form method="post" action="../views/table_search.ejs">
+                    <form method="POST" action="/table/table_add">
                     <div class="form-row">
                             <div class="sm">
                               <label for="inputName4">Account Name</label>
@@ -102,6 +110,7 @@
                         <div class = "form-row-6">
                                 <div class ="form-group col-md-6">
                                 <label for="inputOption4">Account Status</label>
+                                </br>
                                     <select>
                                             <option value="active ">Active</option>
                                             <option value="Not Active">Not Active</option>
@@ -129,11 +138,12 @@
                             </br>
                             </div>
                             </form>
-       
-        <table id="table1">
+     
+        <form action = "/table_edit">
+        <table id="table1" >
                 <tbody id="ew">
                 <tr>
-                        <a key="text" name="btnUpEmp" href="../views/account_renewal?key=ADD">
+                        <a key="text" name="btnUpEmp" href="">
                     <td>Account Name</td> 
                     <td>Account Type</td>
                     <td>Account Number</td>
@@ -159,12 +169,13 @@
                 <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key"
                         value="<%=name%>"><button type="deleteBtn" onclick="deleteRow(this)"
                         value=<%=name%>class="btn btn-primary">delete </button></td>
-                <td> <button type="EditBtn" onclick="editRow(this)" class="btn btn-primary">Edit </button></td>
+                <td> <button type="EditBtn" href="table/table_edit" class="btn btn-primary">Edit </button></td>
                 
-        
+                         
                     </tr>
                 
                     </tbody>
                 </table>
+                </form>
     </body>
 </html>

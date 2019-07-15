@@ -10,7 +10,7 @@
 
  <head>
  
- <script type="text/javascript" src="/javascripts/accountsDetailsJS.js"></script>
+ <script type="text/javascript" src="/javascripts/scripts.js"></script>
 
  </head>
 
@@ -33,7 +33,7 @@
  
 
  <hr>
- //
+ 
  <form action="../views/table.ejs" method="post" id="acc_edit_ad" autocomplete="off">
 
  <div class="content">
@@ -249,7 +249,7 @@
  </div>
  <div class="col-sm-12 col-md-3">
  <input type="button" class="btn clr clr1" name="clear_frm_ed" id="clear_frm_ed"
- value="Clear Form" onclick="cleareditAccountRenewalDetailsTab()">
+ value="Clear Form" onclick="clearEditAmount()">
 
  </div>
  <div class="col-sm-12 col-md-5"></div>
@@ -735,7 +735,7 @@ Account Information
  <div class="card tp">
  <div class="card-header"></div>
  <div class="card-body">
- <form action="../../accountsModule/accountsDetails/update_renewal_edit" method="post" id="acc_ren_edit" autocomplete="off">
+ <form action="/table" method="post" id="acc_ren_edit" autocomplete="off">
 
  <h6>Account Renewal Details</h6>
 
@@ -752,7 +752,7 @@ Account Information
 
 
  <hr>
- <form action="" id="acc_renewal_ed" method="post" >
+ <form action="" id="acc_renewal_ed" method="post"  >
 
  <div class="content">
  <div class="container row mb-4">
@@ -842,12 +842,12 @@ Account Information
  </div>
  <div class="col-sm-12 col-md-3">
  <input type="button" class="btn clr clr1" name="clear_frm_ed" id="clear_frm_ed"
- value="Clear Form" onclick="cleareditAccountRenewalDetailsTab()">
+ value="Clear Form" onclick="clearEditAmount()">
 
  </div>
  <div class="col-sm-12 col-md-5"></div>
  <div class="col-sm-12 col-md-2">
- <input type="button" class="btn" name="sub_ed" id="sub_ed" value="Submit" onclick="AccountRenewalDetails()" >
+ <input type="button" class="btn" name="sub_ed" id="sub_ed" value="Submit" onclick="Submit()" >
  </div>
  </div>
 
@@ -862,109 +862,7 @@ Account Information
  <%}%>
 
  <!--EDIT END-->
- <!-- VIEW -START-->
 
- <%if(pagetype=='VIEW'){%>
- <div class="content">
- <div class="row-sm ">
- <div class="col-sm-12">
- <div class="card tp">
- <div class="card-header"></div>
- <div class="card-body">
- <form action="../views/table.ejs" method="post" autocomplete="off" >
-
- <h6>Account Renewal Details</h6>
-
- <hr>
- <h6>VIEW RECORD</h6>
- <hr>
-
- <div class="content">
- <fieldset disabled>
- <div class="container row mb-4">
- <div class="col-sm-12 col-md-6">
- <label for="acc_edit_acc_typ_sear_vd" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important;">
- Account Type
- </label>
- <input type="text" class="col-sm-12 col-md-6" name="acc_edit_acc_typ_sear_vd"
- id="acc_edit_acc_typ_sear_vd" placeholder="" value="<%=acc_type%>" >
-
- </div>
- <div class="col-sm-12 col-md-6">
- <label for="acc_edit_acc_mem_sear_vd" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important;">
- Account Member
- </label>
- <input type="text" class="col-sm-12 col-md-6" name="acc_edit_acc_mem_sear_vd"
- id="acc_edit_acc_mem_sear_vd" placeholder="" value="<%=acc_num%>">
-
- </div>
- </div>
- <div class="container row mt-2">
- <div class="col-sm-12 col-md-6">
- <label for="acc_edit_mem_sear_vd" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important;">
- Member
- </label>
- <input type="text" class="col-sm-12 col-md-6" name="acc_edit_mem_sear_vd"
- id="acc_edit_mem_sear_vd" placeholder="" value="<%=mem_id%>">
- </div>
- <div class="col-sm-12 col-md-6 ">
- <label for="acc_edit_renw_date_vd" class="mr-sm-4 col-sm-12 col-md-5"
- style="padding-left:0% !important;">Renewal Date
- </label>
- <input type="text" class="col-sm-12 col-md-6"
- name="acc_edit_renw_date_vd" id="acc_edit_renw_date_vd" value="<%=moment(ren_date).format("DD-MM-YYYY")%>"
- placeholder="" required value="<%=ren_date%>" >
- <span><i class="material-icons iicon1 iicon11"
- name="acc_edit_renw_date_vd"
- id="acc_edit_renw_date_vd"
- data-toggle="acc_edit_renw_date_vd"
- data-target-name="acc_edit_renw_date_vd">
- event_note
- </i></span>
-
- </div>
- </div>
- <div class="container row mt-4">
- <div class="col-sm-12 col-md-6">
- <label for="acc_edit_renw_amoun_vd" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important;">Renewal Amount
- </label>
- <input type="text" class="col-sm-12 col-md-6" name="acc_edit_renw_amoun_vd" id="acc_edit_renw_amoun_vd"
- placeholder=" " value="<%=ren_amt%>" >
-
- </div>
- <div class="col-sm-12 col-md-6">
- <label for="acc_edit_instal_amount_vd" class="mr-sm-4 col-sm-12 col-md-5" style="padding-left:0% !important;">Installment Amount
-
- </label>
- <input type="text" class="col-sm-12 col-md-6" name="acc_edit_instal_amount_vd"
- id="acc_edit_instal_amount_vd" placeholder=" " value="<%=install_amt%>">
-
- </div>
- </div>
-
- </fieldset>
-
- <div class="container row mt-4">
- <div class="col-sm-12 col-md-2">
- <a type="text" class="btn" href="../views/table.ejs" name="bck_search_vw" id="bck_search_vw" value="Back to Search">Back to Search</a>
-
- </div>
-
- <div class="col-sm-12 col-md-5"></div>
-
- </div>
- </div>
- </form>
-
- </div>
-
- </div>
- </div>
- </div>
- </div>
-<%}%>
-
-<!-- VIEW -END-->
 
 
  
