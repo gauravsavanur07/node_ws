@@ -31,6 +31,9 @@ router.get('/', function (_req, res, _next) {
                 var open_date = result.rows[0].ad_ch_current_type;
                 var close_date = result.rows[0].ad_d_last_tran_date;
 
+                //Account Edit
+            
+
 
             }
 
