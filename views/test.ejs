@@ -222,7 +222,7 @@ if (index !== null) {
         <tbody id="ew">
             <%for(var i=0;i<jsondet.length;i++){%>
             <input type="hidden" class="form-control" name="pass" placeholder="key" value="<%= jsondet[i].name%>">
-            var j=<%=i%>;
+
             <tr id="<%=i%>">
                 <td><%=jsondet[i].id%></td>
                 <td><%=jsondet[i].name%></td>

@@ -20,6 +20,15 @@ function clearEditAmount(){
     document.getElementById('acc_mem_id').value="";
     document.getElementById('acc_edit_instal_amount_ed').value="";
     document.getElementById('renewal_edit').value="";
+    
+    document.getElementById('account_name ').value = "";
+    document.getElementById('account_number').value="";
+    document.getElementById('acc_status').value="";
+    document.getElementById('acc_curr_balance').value = "";
+    document.getElementById('acc_type') = "";
+    document.getElementById('open_date')="";
+    document.getElementById('close_date')="";
+
 
 }
 function add_account_limit(){
