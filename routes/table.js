@@ -32,7 +32,7 @@ router.get('/', function (_req, res, _next) {
                 var close_date = result.rows[0].ad_d_last_tran_date;
 
                 //Account Edit
-            
+
 
 
             }
@@ -76,7 +76,7 @@ router.get('/table_edit', function (_req, res, _next) {
                 var close_date = result.rows[0].ad_d_last_tran_date;
 
                 //Account Edit
-            
+
 
 
             }
@@ -121,7 +121,7 @@ router.get('/table_add', function (_req, res, _next) {
                 var close_date = result.rows[0].ad_d_last_tran_date;
 
                 //Account Edit
-            
+
 
 
             }
@@ -154,38 +154,60 @@ router.post('/', function (req, res) {
 
 
 
-
-
+//Inserting values Database  Add Btn 
 router.post('/table_add', function (req, res) {
     var divtype = req.query.key;
     console.log("DIV_TYPE", divtype);
 
+    database.connect(function (err, done) {
+        if (err) {
+            console.log("not able to get connection " + err);
+            res.status(400).send(err);
+        }
 
-    var id = req.body.ad_ch_acct_id;
-    var name = req.body.ad_ch_name;
-    var status = req.body.ad_ch_acct_status;
-    var open_date = req.body.ad_ch_opn_date;
-    var close_date = req.body.ad_d_last_tran_date;
 
-    res.render('table_add', { pagetype:divtype, id: id, name: name, stat: status, open: open_date, close: close_date });
 
+        var id = req.body.ad_ch_acct_id;
+        var name = req.body.ad_ch_name;
+        var status = req.body.ad_ch_acct_status;
+        var open_date = req.body.ad_ch_opn_date;
+        var close_date = req.body.ad_d_last_tran_date;
+
+        database.query("INSERT into account_details(account_name,account_number,acc_status,acc_cur_balance,acc_type,open_date,close_dat) values($1,$2,$3,$4,$5,$6),[INSERT into account_details(account_name,account_number,acc_status,acc_cur_balance,acc_type,open_date,close_dat]", function (_req, result) {
+            res.render('table_add', { pagetype: divtype, id: id, name: name, stat: status, open: open_date, close: close_date });
+
+        });
+    });
 })
 
+
+//Inserting Values into a table EDIT Button 
 router.post('/table_edit', function (req, res) {
     var divtype = 'EDIT';
     console.log("DIV_TYPE", divtype);
 
+    database.connect(function (err, done) {
+        if (err) {
+            console.log("not able to get connection " + err);
+            res.status(400).send(err);
+        }
 
-    var account_name = req.body.ad_ch_name;
-    var account_number = req.body.ad_n_acct_number;
-    var acc_status = req.body.ad_ch_acct_status;
-    var acc_curr_balance = req.body.ad_n_current_bal;
-    var acc_type = req.body.ad_ch_acct_type;
-    var open_date = req.body.ad_ch_current_type;
-    var close_date = req.body.ad_d_last_tran_date;
 
-    res.render('table_edit', {pagetype:divtype, name: account_name, num: account_number, cur: acc_curr_balance, status: acc_status, dat: date, type: acc_type, open: open_date, close: close_date });
+        var account_name = req.body.name;
+        var account_number = req.body.number;
+        var acc_status = req.body.status;
+        var acc_curr_balance = req.body.balance;
+        var acc_type = req.body.type;
+        var open_date = req.body.open_date;
+        var close_date = req.body.close_date;
 
-})
+        database.query('INSERT INTO  account_details(account_name,account_number,acc_status,acc_cur_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6),[account_name,account_number,acc_status,acc_cur_balance,acc_type,open_date,close_date]', function (_req, result) {
+
+            console.log("Account Details", res);
+            res.render('table_edit', { pagetype: divtype, name: account_name, num: account_number, cur: acc_curr_balance, status: acc_status, dat: date, type: acc_type, open: open_date, close: close_date });
+        });
+    });
+});
+
 
 module.exports = router;
