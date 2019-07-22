@@ -60,7 +60,7 @@
 
             }
             function deleteRow(rowid) {
-            alert(rowid);
+              window.confirm("Are you sure ?? ");
             var i = rowid.parentNode.parentNode.rowIndex;
 
             document.getElementById("table1").deleteRow(i);
@@ -122,28 +122,29 @@
 
                             
                             </div>
-                           
-                               <div class = "form -group col-md-6">
-                                    <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
-                                    value="<%=name%>"><button type="deleteBtn" onclick="searchRow(this)"
-                                    value=<%=name%>class="btn btn-primary">Search </button>
-                               </div>
+                          </div>
                             </br>
                                <div class = "form-group  col-md-6">
                                     <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
-                                    value="<%=name%>"><button type="EditBtn" onclick=""
-                                    value=<%=name%>class="btn btn-primary">Add </button>
+                                    value=""><button type="EditBtn" onclick="/table/table_add"
+                                    value=""class="btn btn-primary">Add </button>
                                </div>
-                               </div>
+                              
                             </br>
-                            </div>
+                            
+                            <div class = "form -group col-md-6">
+                              <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                              value=""><button type="deleteBtn" onclick="searchRow(this)"
+                              value=""class="btn btn-primary">Search </button>
+                         </div>
                             </form>
-     
+                          </br>
         <form action = "/table/table_edit">
         <table id="table1" >
                 <tbody id="ew">
-                <tr>
-                    <td>Account Name</td> 
+                    
+                <tr bgcolor="#b1c9c4">
+                    <td >Account Name</td> 
                     <td>Account Type</td>
                     <td>Account Number</td>
                     <td>Account Status</td>
@@ -153,25 +154,27 @@
                     <td>Delete Button</td>
                     <td>Edit Button</td>
                 </tr>
+             
 
-                  
+                <%for(var i=0;i<qw.length;i++){%>
                     
                 <tr>
-                <td ><%=name%></td>
-                <td><%=type%></td>
-                <td><%=number%></td>
-                <td><%=status%></td>
-                <td><%=balance%></td>
-                <td><%=open%></td>
-                <td><%=close%></td>
+                <td ><%=qw[i].ad_ch_name%></td>
+                <td><%=qw[i].ad_ch_acct_type%></td>
+                <td><%=qw[i].ad_n_acct_number%></td>
+                <td><%=qw[i].ad_ch_acct_status%></td>
+                <td><%=qw[i].ad_n_current_bal%></td>
+                <td><%=qw[i].ad_ch_current_type%></td>
+                <td><%=qw[i].ad_d_last_tran_date%></td>
                 
                 <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key"
-                        value="<%=name%>"><button type="deleteBtn" onclick="deleteRow(this)"
-                        value=<%=name%>class="btn btn-primary">delete </button></td>
+                        value=""><button type="deleteBtn" onclick="deleteRow(this)"
+                        value=""class="btn btn-primary">delete </button></td>
                 <td> <button type="EditBtn" id ="edit" href="/table/table_edit" class="btn btn-primary">Edit </button></td>
                 
                          
                     </tr>
+                    <%}%>
                 
                     </tbody>
                 </table>
