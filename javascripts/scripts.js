@@ -20,11 +20,11 @@ function openingAmount(empcd){
 function clearEditAmount(){
     
     
-    document.getElementById('account_name ').value = "";
-    document.getElementById('account_number').value="";
-    document.getElementById('acc_status').value="";
-    document.getElementById('acc_curr_balance').value = "";
-    document.getElementById('acc_type') = "";
+    document.getElementById('acc_name ').value = "";
+    document.getElementById('number').value="";
+    document.getElementById('status').value="";
+    document.getElementById('balance').value = "";
+    document.getElementById('type') = "";
     document.getElementById('open_date')="";
     document.getElementById('close_date')="";
 
@@ -32,14 +32,14 @@ function clearEditAmount(){
 }
 
 function clearAddAmount(){
-    document.getElementById('account_name ').value = "";
-    document.getElementById('account_number').value="";
-    document.getElementById('acc_status').value="";
-    document.getElementById('acc_curr_balance').value = "";
-    document.getElementById('acc_type') = "";
+    
+    document.getElementById('acc_name ').value = "";
+    document.getElementById('number').value="";
+    document.getElementById('status').value="";
+    document.getElementById('balance').value = "";
+    document.getElementById('type') = "";
     document.getElementById('open_date')="";
     document.getElementById('close_date')="";
-
 }
 function add_account_limit(){
     var acc_type = document.getElementById("sel_acct").value;

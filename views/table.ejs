@@ -17,7 +17,8 @@
 /* Title */
                 .navbar-default .navbar-brand {
                  color:	#32CD32;
-              }
+
+                }
                 .sm{
                     width:50%;
                     height:100%;
@@ -67,6 +68,7 @@
             }
         </script>
             <body>
+              
                     <nav class="navbar navbar-expand-lg navbar-dark bg-black static-top">
                             <div class="container">
                               <a class="navbar-brand" href="#">
@@ -107,7 +109,8 @@
                               <input type="text" class="form-control" id="pass" name="pass" placeholder="Account Number">
                             </div>
                         </br>
-                        <div class = "form-row-6">
+                        <div class = "form-row">
+                        <div class = "sm">
                                 <div class ="form-group col-md-6">
                                 <label for="inputOption4">Account Status</label>
                                 </br>
@@ -118,14 +121,28 @@
                                             
                                           </select>
                                </div>
+                              </div>
                             </br>
-
+                            
+                                    <div class="sm-2">
+                                        <label for="inputName4">Account Balance</label>
+                                        <input type="email" class="form-control" id="email" name="Opening Balance" placeholder="Account Balance">
+                                      </div>
+                                
+                          
+                                
                             
                             </div>
+                            
+
+                            
+                         
+
+                            
                           </div>
                             </br>
                                <div class = "form-group  col-md-6">
-                                    <input type="hidden" class="form-control" id=i name="pass" placeholder="key"
+                                    <input type="hidden" class="form-control" id="ew" name="pass" placeholder="key"
                                     value=""><button type="EditBtn" onclick="/table/table_add"
                                     value=""class="btn btn-primary">Add </button>
                                </div>
@@ -170,11 +187,12 @@
                 <td><input type="hidden" class="form-control" id=i name="pass" placeholder="key"
                         value=""><button type="deleteBtn" onclick="deleteRow(this)"
                         value=""class="btn btn-primary">delete </button></td>
+                      
+                    
                 <td> <button type="EditBtn" id ="edit" href="/table/table_edit" class="btn btn-primary">Edit </button></td>
-                
-                         
-                    </tr>
-                    <%}%>
+                <%}%>
+              </tr>         
+                    
                 
                     </tbody>
                 </table>
