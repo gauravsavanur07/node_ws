@@ -265,7 +265,7 @@ router.post('./table_search', function(req,res){
     var open_date = req.body.open_date;
     var close_date = req.body.close_date;
 
-    if(account_name != "" && number != ""&& acc_status && acc_curr_balance && acc_type && open_date && close_date){
+    if(account_name != "" && number != "" && acc_status && acc_curr_balance && acc_type && open_date && close_date){
         account_name = req.body.name;
         number = req.body.number;
         acc_status = req.body.status;
@@ -274,7 +274,7 @@ router.post('./table_search', function(req,res){
         open_date = req.body.open_date;
         close_date = req.body.close_date;
     }
-    else if(account_name!= "" && number == "" && acc_status=="" && acc_type==""&&close_date=="select") {
+    else if(account_name!= '' && number == '' && acc_status == '' && acc_curr_balance == '' && acc_type== '' && close_date=="select") {
         account_name = req.body.name;
         number =  null;
         acc_status = null;
