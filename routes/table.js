@@ -303,9 +303,45 @@ router.post('./table_search', function(req,res){
     open_date == null;
     close_date == null;
    }
+   else if(account_name=='Select'&& number==''&& acc_status == '' && acc_curr_balance == '' && open_date == '' ){
+        account_name = req.body.name;
+        number = req.body.number;
+        acc_status = null;
+        acc_curr_balance = null;
+        open_date = null;
 
-    console.log("account_details", account_name, number, acc_status, acc_curr_balance, acc_type, open_date, close_date);
-   }    
+   }
+   else  if(account_name!='' && number ==''&& acc_status == '' && acc_curr_balance=='' && open_date =='' && close_date == 'Select'   ){
+        account_name = req.body.account_name;
+        number = req.body.number;
+        acc_status = null;
+        open_date = null;
+        close_date = null;   
+
+
+   }
+   else if(account_name=='Select' && number=='' && acc_status!= ' ' && open_date!='' && close_date != '' ){
+       account_name = null;
+       number = null;
+       acc_status = null;
+       acc_curr_balance = null;
+       open_date = req.body.open_date;
+       close_date = req.body.close_date;
+
+   }
+   database.query(select * from account_details where (account_name = $1 or number = $2 or (open_date between $3 and $4)or close_date = $5) [account_name,number,status,acc_curr_balance,acc_type,open_date,close_date], function (err, searchres){
+       res.render('table',{
+           acc:searchres.rows;
+       })
+   } )
+   var account_name = req.body.name;
+   var number = req.body.number;
+   var acc_status = req.body.status;
+   var acc_curr_balance = req.body.balance;
+   var acc_type = req.body.type;
+   var open_date = req.body.open_date;
+   var close_date = req.body.close_date;
+}    
 }
 
 
