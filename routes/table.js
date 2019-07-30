@@ -1,5 +1,6 @@
 var express = require('express');
 var database = require('../database/database');
+var moment = require('moment');
 var router = express.Router();
 
 router.get('/', function (_req, res, _next) {
@@ -40,11 +41,11 @@ router.get('/', function (_req, res, _next) {
             }
 
 
-            console.log("Renewal Details",cd);
+            console.log("Renewal Details", cd);
             console.log("details", cand);
 
             // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
-            res.render('table', { r:cd ,qw:cand});
+            res.render('table', { r: cd, qw: cand ,moment:moment});
         });
 
     });
@@ -87,14 +88,14 @@ router.get('/table_edit', function (_req, res, _next) {
             }
 
 
-            console.log("Renewal Details",cd);
+            console.log("Renewal Details", cd);
             console.log("details", cand);
 
 
-            
+
 
             // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
-            res.render('table', { r:cd ,qw:cand});
+            res.render('table', { r: cd, qw: cand ,moment:moment});
 
         });
 
@@ -139,21 +140,21 @@ router.get('/table_add', function (_req, res, _next) {
             }
 
 
-            console.log("Renewal Details",cd);
+            console.log("Renewal Details", cd);
             console.log("details", cand);
 
 
-            
+
 
             // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
-            res.render('table', { r:cd ,qw:cand});
+            res.render('table', { r: cd, qw: cand,moment:moment });
 
         });
     });
 });
 
 router.post('/', function (req, res) {
-    var divtype = req.query.key;
+    
     console.log("DIV_TYPE", divtype);
 
     database.connect(function (err, done) {
@@ -164,7 +165,7 @@ router.post('/', function (req, res) {
 
 
 
-        
+
         var account_name = req.body.name;
         var number = req.body.number;
         var acc_status = req.body.status;
@@ -175,8 +176,8 @@ router.post('/', function (req, res) {
 
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
-           
-            res.render('table', { pagetype: divtype, name: account_name, number: number, balance: acc_curr_balance, status: acc_status, type: acc_type, open: open_date, close: close_date });
+
+            res.render('table', { pagetype: divtype, name: account_name, number: number, balance: acc_curr_balance, status: acc_status, type: acc_type, open: open_date, close: close_date,moment:moment });
         });
     });
 })
@@ -196,7 +197,7 @@ router.post('/table_add', function (req, res) {
 
 
 
-        
+
         var account_name = req.body.name;
         var number = req.body.number;
         var status = req.body.status;
@@ -205,11 +206,11 @@ router.post('/table_add', function (req, res) {
         var open_date = req.body.open_date;
         var close_date = req.body.close_date;
 
-        console.log("Account Details", account_name,number,status,balance,type,open_date,close_date);
+        console.log("Account Details", account_name, number, status, balance, type, open_date, close_date);
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
-           
-            res.render('table_add', { pagetype: divtype, name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date });
+
+            res.render('table_add', { pagetype: divtype, name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date,moment:moment });
         });
     });
 })
@@ -235,27 +236,28 @@ router.post('/table_edit', function (req, res) {
         var open_date = req.body.open_date;
         var close_date = req.body.close_date;
 
-        console.log("Account Details", account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date)
+        console.log("Account Details", account_name, number, acc_status, acc_curr_balance, acc_type, open_date, close_date)
 
         database.query('insert into  account_details(account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7),[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (err, result) {
 
-            console.log("Account Details", );
-            res.render('table', { pagetype: divtype });
+            console.log("Account Details");
+            res.render('table', { pagetype: divtype,moment:moment });
         });
     });
 });
 //Deleting Values from the table 
-router.post('./table_delete', function(req,res){
+router.post('./table_delete', function (req, res) {
     var number = req.body.number;
-    database.query("update account_details set number = $1 order by id",['N'], function(err, searchres){
-        res.render('/table',{
-             num:searchres,
-            nums:number
+    database.query("update account_details set number = $1 order by id", ['N'], function (err, searchres) {
+        res.render('/table', {
+            num: searchres,
+            nums: number,
+            moment:moment
         });
     });
 });
 
-router.post('./table_search', function(req,res){
+router.post('./table_search', function (req, res) {
     console.log("Search Particular Record");
     var account_name = req.body.name;
     var number = req.body.number;
@@ -265,7 +267,7 @@ router.post('./table_search', function(req,res){
     var open_date = req.body.open_date;
     var close_date = req.body.close_date;
 
-    if(account_name != "" && number != "" && acc_status && acc_curr_balance && acc_type && open_date && close_date){
+    if (account_name != "" && number != "" && acc_status && acc_curr_balance && acc_type && open_date && close_date) {
         account_name = req.body.name;
         number = req.body.number;
         acc_status = req.body.status;
@@ -274,9 +276,9 @@ router.post('./table_search', function(req,res){
         open_date = req.body.open_date;
         close_date = req.body.close_date;
     }
-    else if(account_name!= '' && number == '' && acc_status == '' && acc_curr_balance == '' && acc_type== '' && close_date=="select") {
+    else if (account_name != '' && number == '' && acc_status == '' && acc_curr_balance == '' && acc_type == '' && close_date == "select") {
         account_name = req.body.name;
-        number =  null;
+        number = null;
         acc_status = null;
         acc_curr_balance = null;
         acc_type = null;
@@ -284,68 +286,71 @@ router.post('./table_search', function(req,res){
         close_date = null;
 
     }
-    else if(
-        account_name='Select'&&number!=''&& acc_status != '' && acc_renw_date_and==''&&acc_renw_mem_id=='Select'){
-            account_name = null;
-            number = req.body.number;
-            acc_status = null;
-            acc_curr_balance = null;
-            acc_type = null;
-            open_date = null;
-            close_date = null;       
-        } 
-   else if(account_name='Select' && number =='' && acc_status!='' && acc_curr_balance!= ''&& open_date=='Select'&& close_date==''){
-    account_name == null;
-    number == null;
-    acc_status = req.body.status;
-    acc_curr_balance = req.body.balance;
-    acc_type = null;
-    open_date == null;
-    close_date == null;
-   }
-   else if(account_name=='Select'&& number==''&& acc_status == '' && acc_curr_balance == '' && open_date == '' ){
+    else if (
+        account_name = 'Select' && number != '' && acc_status != '' && acc_renw_date_and == '' && acc_renw_mem_id == 'Select') {
+        account_name = null;
+        number = req.body.number;
+        acc_status = null;
+        acc_curr_balance = null;
+        acc_type = null;
+        open_date = null;
+        close_date = null;
+    }
+    else if (account_name = 'Select' && number == '' && acc_status != '' && acc_curr_balance != '' && open_date == 'Select' && close_date == '') {
+        account_name == null;
+        number == null;
+        acc_status = req.body.status;
+        acc_curr_balance = req.body.balance;
+        acc_type = null;
+        open_date == null;
+        close_date == null;
+    }
+    else if (account_name == 'Select' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '') {
         account_name = req.body.name;
         number = req.body.number;
         acc_status = null;
         acc_curr_balance = null;
         open_date = null;
 
-   }
-   else  if(account_name!='' && number ==''&& acc_status == '' && acc_curr_balance=='' && open_date =='' && close_date == 'Select'   ){
+    }
+    else if (account_name != '' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '' && close_date == 'Select') {
         account_name = req.body.account_name;
         number = req.body.number;
         acc_status = null;
         open_date = null;
-        close_date = null;   
+        close_date = null;
 
 
-   }
-   else if(account_name=='Select' && number=='' && acc_status!= ' ' && open_date!='' && close_date != '' ){
-       account_name = null;
-       number = null;
-       acc_status = null;
-       acc_curr_balance = null;
-       open_date = req.body.open_date;
-       close_date = req.body.close_date;
+    }
+    else if (account_name == 'Select' && number == '' && acc_status != ' ' && open_date != '' && close_date != '') {
+        account_name = null;
+        number = null;
+        acc_status = null;
+        acc_curr_balance = null;
+        open_date = req.body.open_date;
+        close_date = req.body.close_date;
 
-   }
-   database.query(select * from account_details where (account_name = $1 or number = $2 or (open_date between $3 and $4)or close_date = $5) [account_name,number,status,acc_curr_balance,acc_type,open_date,close_date], function (err, searchres){
-       res.render('table',{
-           acc:searchres.rows;
-       })
-   } )
-   var account_name = req.body.name;
-   var number = req.body.number;
-   var acc_status = req.body.status;
-   var acc_curr_balance = req.body.balance;
-   var acc_type = req.body.type;
-   var open_date = req.body.open_date;
-   var close_date = req.body.close_date;
-}    
-}
+    }
+    else if (account_name == 'Select' && number != '' && acc_status != '' && acc_curr_balance != '' && open_date != '' && close_date != 'Select') {
+        account_name = null;
+        number = req.body.number;
+        acc_status = req.body.status;
+        acc_curr_balance = req.body.balance;
+        open_date = req.body.open_date;
+        close_date = req.body.close_date;
+    }
+
+    database.query("select * from account_details where (account_name = $1 or number = $2 or (open_date between $3 and $4)or close_date = $5)", [account_name, number, status, acc_curr_balance, acc_type, open_date, close_date], function (err, searchres) {
+        res.render('table', {
+            acc: searchres.rows,
+            moment:moment
+        })
+    })
 
 
-})
- 
+
+
 });
+
+
 module.exports = router;
