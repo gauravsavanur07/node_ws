@@ -155,7 +155,7 @@ router.get('/table_add', function (_req, res, _next) {
 
 router.post('/', function (req, res) {
     
-    console.log("DIV_TYPE", divtype);
+
 
     database.connect(function (err, done) {
         if (err) {
@@ -177,7 +177,7 @@ router.post('/', function (req, res) {
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
 
-            res.render('table', { pagetype: divtype, name: account_name, number: number, balance: acc_curr_balance, status: acc_status, type: acc_type, open: open_date, close: close_date,moment:moment });
+            res.render('table', { name: account_name, number: number, balance: acc_curr_balance, status: acc_status, type: acc_type, open: open_date, close: close_date,moment:moment });
         });
     });
 })
@@ -186,9 +186,8 @@ router.post('/', function (req, res) {
 
 //Inserting values Database  Add Btn 
 router.post('/table_add', function (req, res) {
-    var divtype = req.query.key;
-    console.log("DIV_TYPE", divtype);
-
+    
+   
     database.connect(function (err, done) {
         if (err) {
             console.log("not able to get connection " + err);
@@ -206,11 +205,12 @@ router.post('/table_add', function (req, res) {
         var open_date = req.body.open_date;
         var close_date = req.body.close_date;
 
-        console.log("Account Details", account_name, number, status, balance, type, open_date, close_date);
+        var jsonString = '{"user_name" : account_name, "number": number, "status":status, balance:"balance", type:"type", open_date:"open_date", close_date:"close_date"}';
+
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
 
-            res.render('table_add', { pagetype: divtype, name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date,moment:moment });
+            res.render('table_add', { name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date,moment:moment,jsp:jsonString });
         });
     });
 })
@@ -249,6 +249,8 @@ router.post('/table_edit', function (req, res) {
 router.post('./table_delete', function (req, res) {
     var number = req.body.number;
     database.query("update account_details set number = $1 order by id", ['N'], function (err, searchres) {
+        req.flash('success_msg', 'Record Deleted Successfully');
+        res.locals.message = req.flash();
         res.render('/table', {
             num: searchres,
             nums: number,
