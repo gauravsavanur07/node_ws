@@ -29,7 +29,7 @@
   </br>
         <div>
             
-          <form method="post" action = "/table" >
+          <form method="post" >
 
                     <div class="card text-center" style="width: 30rem;">
                       <div class="col-lg-2 ">
@@ -38,15 +38,15 @@
                       <div class ="col-lg-2"></div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Account</label>
-                  <input type="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="" value=<%= name %>>
+                  <input type="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Account Name" value=<%= name %>>
                 </div>
                 <div class="form-group">
                   <label for="number">Account Number</label>
-                  <input type="number " class="form-control" id="number" placeholder="" value =>
+                  <input type="number " class="form-control" id="number" placeholder="NNumber" value =>
                 </div>
                 <div class="form-group">
                         <label for="exampleInputPassword1">Account Status</label>
-                        <input type="number " class="form-control" id="status" placeholder="P" value =>
+                        <input type="number " class="form-control" id="status" placeholder="Status" value =>
                       </div>
                       <div class="form-group">
                             <label for="exampleInputPassword1">Account Balance</label>
@@ -90,7 +90,7 @@
                 <button type="submit" class="btn btn-primary" onclick="">Submit</button>
                           </br>
                         </form>
-                <button type="submit" class="btn btn-primary" onclick="clearAddAmount()">Clear</button>
+                <button type="submit" class="btn btn-primary" onclick="clearAddAmount(this)">Clear</button>
 
               </div>
               
