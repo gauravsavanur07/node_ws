@@ -244,7 +244,7 @@ router.post('/table_edit', function (req, res) {
         database.query('insert into  account_details(account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7),[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (err, result) {
 
             console.log("Account Details");
-            
+
             req.flash('success_msg', 'Record Deleted Successfully');
             res.locals.message = req.flash();
 
@@ -314,7 +314,7 @@ router.post('./table_search', function (req, res) {
         open_date == null;
         close_date == null;
     }
-    else if (account_name == 'Select' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '') {
+    else if(account_name == 'Select' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '') {
         account_name = req.body.name;
         number = req.body.number;
         acc_status = null;
@@ -322,7 +322,7 @@ router.post('./table_search', function (req, res) {
         open_date = null;
 
     }
-    else if (account_name != '' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '' && close_date == 'Select') {
+     else if (account_name != '' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '' && close_date == 'Select') {
         account_name = req.body.account_name;
         number = req.body.number;
         acc_status = null;

@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var moment = require('moment');
+var session = require('express-session');
+
 var expressValidator = require('express-validator');
 //Commented Down the Flash Message Code
 var cookieParser = require('cookie-parser');
@@ -38,6 +40,13 @@ app.use(function ( req,res,next){
     next();
 
 });
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 
 //Flash Message
 // app.use(flash());
