@@ -176,6 +176,7 @@ router.post('/', function (req, res) {
 
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
+            
 
             res.render('table', { name: account_name, number: number, balance: acc_curr_balance, status: acc_status, type: acc_type, open: open_date, close: close_date,moment:moment });
         });
@@ -209,6 +210,8 @@ router.post('/table_add', function (req, res) {
 
         database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
+            req.flash('success_msg', 'Record Added Successfully');
+            res.locals.message = req.flash();
 
             res.render('table_add', { name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date,moment:moment,jsp:jsonString });
         });
@@ -241,6 +244,10 @@ router.post('/table_edit', function (req, res) {
         database.query('insert into  account_details(account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7),[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (err, result) {
 
             console.log("Account Details");
+            
+            req.flash('success_msg', 'Record Deleted Successfully');
+            res.locals.message = req.flash();
+
             res.render('table', { pagetype: divtype,moment:moment });
         });
     });
@@ -343,6 +350,8 @@ router.post('./table_search', function (req, res) {
     }
 
     database.query("select * from account_details where (account_name = $1 or number = $2 or (open_date between $3 and $4)or close_date = $5)", [account_name, number, status, acc_curr_balance, acc_type, open_date, close_date], function (err, searchres) {
+        req.flash('success_msg', 'Record Found Successfully');
+        res.locals.message = req.flash();
         res.render('table', {
             acc: searchres.rows,
             moment:moment
