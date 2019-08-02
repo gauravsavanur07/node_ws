@@ -102,56 +102,56 @@ router.get('/table_edit', function (_req, res, _next) {
     });
 });
 
-// router.get('/table_add', function (_req, res, _next) {
-//     database.connect(function (err, done) {
-//         if (err) {
-//             console.log("not able to get connection " + err);
-//             res.status(400).send(err);
-//         }
-//         database.query('SELECT * from account_details', function (_req, result) {
-//             // closing the connection;
-//             if (err) {
-//                 console.log(err);
-//                 console.log("null ");
-//                 res.status(400).send();
-//             }
-//             var len = result.rows.length;
-//             var cand = result.rows
-//             console.log(len);
-//             if (len > 0) {
+router.get('/table_add', function (_req, res, _next) {
+    database.connect(function (err, done) {
+        if (err) {
+            console.log("not able to get connection " + err);
+            res.status(400).send(err);
+        }
+        database.query('SELECT * from account_details', function (_req, result) {
+            // closing the connection;
+            if (err) {
+                console.log(err);
+                console.log("null ");
+                res.status(400).send();
+            }
+            var len = result.rows.length;
+            var cand = result.rows
+            console.log(len);
+            if (len > 0) {
 
-//                 var cd = JSON.stringify(cand);
-
-
-
-
-//                 // var account_name = result.rows[1].ad_ch_name;
-//                 // var account_number = result.rows[1].ad_n_acct_number;
-//                 // var acc_status = result.rows[1].ad_ch_acct_status;
-//                 // var acc_curr_balance = result.rows[1].ad_n_current_bal;
-//                 // var acc_type = result.rows[1].ad_ch_acct_type;
-//                 // var open_date = result.rows[1].ad_ch_current_type;
-//                 // var close_date = result.rows[1].ad_d_last_tran_date;
-
-//                 //Account Edit
-
-
-
-//             }
-
-
-//             console.log("Renewal Details", cd);
-//             console.log("details", cand);
+                var cd = JSON.stringify(cand);
 
 
 
 
-//             // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
-//             res.render('table', { r: cd, qw: cand,moment:moment });
+                // var account_name = result.rows[1].ad_ch_name;
+                // var account_number = result.rows[1].ad_n_acct_number;
+                // var acc_status = result.rows[1].ad_ch_acct_status;
+                // var acc_curr_balance = result.rows[1].ad_n_current_bal;
+                // var acc_type = result.rows[1].ad_ch_acct_type;
+                // var open_date = result.rows[1].ad_ch_current_type;
+                // var close_date = result.rows[1].ad_d_last_tran_date;
 
-//         });
-//     });
-// });
+                //Account Edit
+
+
+
+            }
+
+
+            console.log("Renewal Details", cd);
+            console.log("details", cand);
+
+
+
+
+            // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
+            res.render('table', { r: cd, qw: cand,moment:moment });
+
+        });
+    });
+});
 
 router.post('/', function (req, res) {
     
@@ -208,10 +208,10 @@ router.post('/table_add', function (req, res) {
 
         var jsonString = '{"user_name" : account_name, "number": number, "status":status, balance:"balance", type:"type", open_date:"open_date", close_date:"close_date"}';
 
-        database.query('insert into  account_details("account_name,number,status,balance,type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,status,balance,type,open_date,close_date]', function (_req, result) {
+        database.query('insert into  account_details("account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date) values($1,$2,$3,$4,$5,$6,$7)",[account_name,number,acc_status,acc_curr_balance,acc_type,open_date,close_date]', function (_req, result) {
 
-            // req.flash('success_msg', 'Record Added Successfully');
-            // res.locals.message = req.flash();
+            req.flash('success_msg', 'Record Added Successfully');
+            res.locals.message = req.flash();
 
             res.render('table_add', { name: account_name, number: number, balance: balance, status: status, type: type, open: open_date, close: close_date,moment:moment,jsp:jsonString });
         });
@@ -256,8 +256,8 @@ router.post('/table_edit', function (req, res) {
 router.post('./table_delete', function (req, res) {
     var number = req.body.number;
     database.query("update account_details set number = $1 order by id", ['N'], function (err, searchres) {
-        // req.flash('success_msg', 'Record Deleted Successfully');
-        // res.locals.message = req.flash();
+        req.flash('success_msg', 'Record Deleted Successfully');
+        res.locals.message = req.flash();
         res.render('/table', {
             num: searchres,
             nums: number,
@@ -350,8 +350,8 @@ router.post('./table_search', function (req, res) {
     }
 
     database.query("select * from account_details where (account_name = $1 or number = $2 or (open_date between $3 and $4)or close_date = $5)", [account_name, number, status, acc_curr_balance, acc_type, open_date, close_date], function (err, searchres) {
-        // req.flash('success_msg', 'Record Found Successfully');
-        // res.locals.message = req.flash();
+        req.flash('success_msg', 'Record Found Successfully');
+        res.locals.message = req.flash();
         res.render('table', {
             acc: searchres.rows,
             moment:moment

@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var moment = require('moment');
-// var session = require('express-session');
+var session = require('express-session');
 
 var expressValidator = require('express-validator');
 //Commented Down the Flash Message Code
 var cookieParser = require('cookie-parser');
-// var flash = require("connect-flash");
+var flash = require("connect-flash");
 
 
 /*Routes */
@@ -26,27 +26,27 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended:false}));
 
 app.use(expressValidator());
 app.use(cookieParser());
-// app.use(flash());
+app.use(flash());
 
 
-// app.use(function ( req,res,next){
-//     res.locals.success_msg = req.flash('success_msg');
-//     res.locals.error_msg = req.flash('error_msg');
-//     res.locals.error = req.flash('error');
-//     res.locals.success=req.flash('success');
-//     res.locals.successrem=req.flash('successrem');
-//     res.locals.successpass=req.flash('successpass');
-//     res.locals.generationsuccess_msg=req.flash('generationsuccess_msg');
-//     next();
+app.use(function ( req,res,next){
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.success=req.flash('success');
+    res.locals.successrem=req.flash('successrem');
+    res.locals.successpass=req.flash('successpass');
+    res.locals.generationsuccess_msg=req.flash('generationsuccess_msg');
+    next();
 
-// });
+});
 
-// app.use(session({
-//     secret: 'keyboard cat',
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: true }
-//   }))
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+  }))
 
 //Flash Message
 // app.use(flash());
