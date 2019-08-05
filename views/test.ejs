@@ -25,6 +25,20 @@
         }
     </style>
     <script>
+        function myFunction(){
+            var printButton = document.getElementById("printpagebutton");
+            var printButton1 = document.getElementById("printpagebutton1");
+            var printButton2 = document.getElementById("printpageButton2");
+            
+        printButton.style.visibility = 'hidden';
+        printButton1.style.visibility = 'hidden';
+        printButton2.style.visibility = 'hidden';
+        //Print the page content
+        window.print()
+        printButton.style.visibility = 'visible';
+        printButton1.style.visibility = 'visible';
+        printButton2.style.visibility = 'visible';
+        }
 
         function rowDelete() {
 
@@ -211,7 +225,8 @@ if (index !== null) {
 </head>
 
 <body>
-    <button type="deleteBtn" onclick="deleteRow()" class="btn btn-primary">current Date</button>
+    <button type ="printButton" onclick="Export2Doc()"class="btn btn-primary">DOC</button>
+    <button type ="printButton1" onclick="pdfButton()"class="btn btn-primary">pdf</button>
     <input type="button" onclick="CreateTableFromJSON()" value="Create Table From JSON" />
     <p id="showData"></p>
     <input type="hidden" class="form-control" id="pass" name="pass" placeholder="" value="<%=jsp%>">

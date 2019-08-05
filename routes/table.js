@@ -3,6 +3,109 @@ var database = require('../database/database');
 var moment = require('moment');
 var router = express.Router();
 
+router.post('/reportHub',function(req,res){
+    console.log("hi step 1 in pdfreport ----");
+    var filename=req.body.sqlfilename;
+   var title= req.body.reporttitlename;
+   var edate=req.body.EndDate;
+   var sdate=req.body.StartDate;
+   console.log("file name",filename);
+   console.log("hi date from file",sdate);
+   console.log("hi date empIdModal",edate);
+   console.log("hi file name",title)
+    var filepath1='C:/Users/trainee/Desktop/mypacs/PACS/sql_files/';
+    filepath1+=filename;
+    console.log("after concate",filepath1)
+    var sql1 = fs.readFileSync(filepath1).toString();
+console.log(sql1)
+ //  var data='001';
+//    var sdate='13-11-2040';
+//    var edate='7-4-2079';
+   console.log("dates getting passed")
+   console.log("sdateedate 1st",sdate);
+   console.log("eedate 1st",edate);
+    pgdbconnect.query(sql1,[sdate,edate],function(err, reportList) {
+        if (err) 
+        {
+            console.error('Error with table try method query', err);
+        } 
+        else 
+        {
+            console.log("to hit the  try method query",reportList )
+           if(reportList.rowCount!=0)
+           {                  
+            list=reportList.rows 
+            console.log("start:::::::::",Object.keys(list).length);
+            headerarr=[];
+             for(var j=0;j<1;j++)
+             { if(list.hasOwnProperty(j))
+                { for(var prop in list[j]){
+                     if(list[j].hasOwnProperty(prop))
+                { console.log(prop);
+                     headerarr.push(prop)  ; 
+            }               
+             } 
+            } 
+        }
+        headerarr1=[];
+        console.log("headers length",headerarr.length);
+        for(var obj in list)
+        { if(list.hasOwnProperty(obj))
+           { for(var prop in list[obj]){
+                if(list[obj].hasOwnProperty(prop))
+           { 
+            headerarr1.push(prop);  
+       }
+       
+        } 
+        console.log("header length",)
+       } 
+   } 
+console.log("midddddddddd:::::::::");
+        dataarr=[];
+        for(var obj in list)
+        { if(list.hasOwnProperty(obj))
+           { for(var prop in list[obj]){
+                if(list[obj].hasOwnProperty(prop))
+           { 
+            dataarr.push(list[obj][prop]);   
+       }
+        } 
+       } 
+   }   console.log("enddddd:::::::::");
+
+  
+    console.log("headerlist1",headerarr1);
+    console.log("rwcount",reportList.rowCount);
+    console.log(Object.keys(list).length);
+
+    console.log("headerarr1",headerarr);
+    console.log("datalist",dataarr);
+
+    tarr=[];
+   for(var h=0;h<headerarr.length;h++){
+            for(var i=0;i<dataarr.length;i++){
+            tarr.push([headerarr1[h],dataarr[i]])
+        h=i+1;
+        }
+    }
+     console.log("qqqqqqqqqqqqq",tarr)
+     console.log("ttttttttttt",headerarr.length,reportList.rowCount)
+   res.render('reportHub/pdf',{
+       title:title,
+       headerlist:headerarr,
+        datalist:dataarr,
+        headerlist1:headerarr1,
+        rowcnt:reportList.rowCount,
+        tdcnt:headerarr.length,
+        tarr:tarr
+   });
+        }
+        }
+   });
+});
+
+
 router.get('/', function (_req, res, _next) {
     database.connect(function (err, done) {
         if (err) {
@@ -21,9 +124,6 @@ router.get('/', function (_req, res, _next) {
             console.log(len);
             if (len > 0) {
 
-                var cd = JSON.stringify(cand);
-
-
 
 
                 // var account_name = result.rows[1].ad_ch_name;
@@ -41,11 +141,11 @@ router.get('/', function (_req, res, _next) {
             }
 
 
-            console.log("Renewal Details", cd);
+           
             console.log("details", cand);
 
             // res.render('table',{result:stringfy,accdetails:account_id,name:account_name,date:account_number,amt:acc_status,install:acc_curr_balance});
-            res.render('table', { r: cd, qw: cand ,moment:moment});
+            res.render('table', {  qw: cand ,moment:moment});
         });
 
     });
@@ -68,7 +168,7 @@ router.get('/table_edit', function (_req, res, _next) {
             console.log(len);
             if (len > 0) {
 
-                var cd = JSON.stringify(cand);
+              
 
 
 
@@ -88,7 +188,7 @@ router.get('/table_edit', function (_req, res, _next) {
             }
 
 
-            console.log("Renewal Details", cd);
+           
             console.log("details", cand);
 
 
@@ -276,6 +376,7 @@ router.post('./table_search', function (req, res) {
     var open_date = req.body.open_date;
     var close_date = req.body.close_date;
 
+
     if (account_name != "" && number != "" && acc_status && acc_curr_balance && acc_type && open_date && close_date) {
         account_name = req.body.name;
         number = req.body.number;
@@ -305,7 +406,7 @@ router.post('./table_search', function (req, res) {
         open_date = null;
         close_date = null;
     }
-    else if (account_name = 'Select' && number == '' && acc_status != '' && acc_curr_balance != '' && open_date == 'Select' && close_date == '') {
+    else if (account_name == 'Select' && number == '' && acc_status != '' && acc_curr_balance != '' && acc_type == '' && open_date == 'Select' && close_date == '') {
         account_name == null;
         number == null;
         acc_status = req.body.status;
@@ -314,7 +415,7 @@ router.post('./table_search', function (req, res) {
         open_date == null;
         close_date == null;
     }
-    else if(account_name == 'Select' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '') {
+    else if(account_name != 'Select' && number != '' && acc_status == '' && acc_curr_balance == '' && open_date == '') {
         account_name = req.body.name;
         number = req.body.number;
         acc_status = null;
@@ -322,16 +423,17 @@ router.post('./table_search', function (req, res) {
         open_date = null;
 
     }
-     else if (account_name != '' && number == '' && acc_status == '' && acc_curr_balance == '' && open_date == '' && close_date == 'Select') {
+     else if (account_name != '' && number != '' && acc_status == '' && acc_curr_balance == '' && open_date == '' && close_date == 'Select') {
         account_name = req.body.account_name;
         number = req.body.number;
         acc_status = null;
+        acc_curr_balance = null;
         open_date = null;
         close_date = null;
 
 
     }
-    else if (account_name == 'Select' && number == '' && acc_status != ' ' && open_date != '' && close_date != '') {
+    else if (account_name == 'Select' && number == '' && acc_status == ' '&& acc_status && open_date != '' && close_date != '') {
         account_name = null;
         number = null;
         acc_status = null;
@@ -355,6 +457,8 @@ router.post('./table_search', function (req, res) {
         res.render('table', {
             acc: searchres.rows,
             moment:moment
+        
+ 
         })
     })
 
