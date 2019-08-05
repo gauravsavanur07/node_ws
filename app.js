@@ -16,6 +16,7 @@ var test = require('./routes/test');
 var table = require('./routes/table');
 
 
+
 app.set('view engine','ejs');
 
 app.listen('7000',function(){
@@ -52,9 +53,10 @@ app.use(cookieParser());
 // app.use(flash());
 // app.use(session({secret: 'keyboard cat', cookie:{maxAge:60000}}))
 //  app.use( database);
-app.use('/login',page)
+app.use('/login',page);
 app.use('/test', test);
 app.use('/table',table);
+app.use('./reportHub', reportHub);
 
 app.get('/',function(req,res){
     res.render('login');
