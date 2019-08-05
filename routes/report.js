@@ -4,7 +4,8 @@ var database = require('../database/database');
 var fs = require('fs');
 
 router.get('./generateReport', generateReportHubFun);
-
+function generateReportHubFun(req,res){
+    console.log("step 1")
 pgdbconnect.query("SELECT rm_ch_report_id,rm_ch_report_name,rm_report_file_sys_details->'sqlfilename' as sqlfilename,rm_report_file_sys_details->'reporttitle' as reporttitle from public.report_maintenance",function(err, reportList){
     if(err){
         console.error('Error with table query', err);
@@ -49,7 +50,7 @@ router.post('./reportHub',function(req,res){
        console.log("sdateedate 1st",sdate);
        console.log("eedate 1st",edate);
    
-       database.query(sql1,[sdate,edate],function(err,reportList)){
+       database.query(sql1,[sdate,edate],function(err,reportList){
         if (err) 
         {
             console.error('Error with table try method query', err);
@@ -133,4 +134,3 @@ module.exports=router;
 
   
 
-})

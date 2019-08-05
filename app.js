@@ -14,7 +14,7 @@ var cookieParser = require('cookie-parser');
 var page=require('./routes/login');
 var test = require('./routes/test');
 var table = require('./routes/table');
-
+var report = require('./routes/report');
 
 
 app.set('view engine','ejs');
@@ -56,7 +56,7 @@ app.use(cookieParser());
 app.use('/login',page);
 app.use('/test', test);
 app.use('/table',table);
-app.use('./reportHub', reportHub);
+app.use('./reportHub', report);
 
 app.get('/',function(req,res){
     res.render('login');
